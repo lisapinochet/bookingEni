@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails de {{ resource.name }}</title>
+</head>
+<body>
+    <h1>{{ resource.name }}</h1>
+    <p>Type : {{ resource.get_type_display }}</p>
+    <p>Catégorie : {{ resource.category.name }}</p>
+    <p>Lieu : {{ resource.location.address }}</p>
+    {% if resource.type == "01" %}
+        <p>Capacité : {{ resource.capacity }}</p>
+    {% endif %}
+    <a href="{% url 'catalogue' %}">Retour au catalogue</a>
+</body>
+</html>

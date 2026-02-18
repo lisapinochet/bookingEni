@@ -1,0 +1,7 @@
+from django.urls import path
+
+from bookings import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]
