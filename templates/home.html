@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+        <h1>Booking ENI</h1>
+
+        <div class="subtitle">
+            La plateforme interne de réservation et de gestion du matériel.
+        </div>
+
+        <ul class="features">
+            <li>📅 Réservation rapide de salles</li>
+            <li>💻 Location de matériel pédagogique</li>
+            <li>🔎 Suivi des disponibilités en temps réel</li>
+            <li>⚡ Gestion simplifiée pour l’administration</li>
+        </ul>
+
+        <div class="info">
+            Pour accéder aux fonctionnalités, vous devez être connecté.
+        </div>
+
+        <a href="{% url 'login' %}" class="login-btn">
+            Se connecter
+        </a>
+
+        <div class="footer">
+            © 2026 - Application interne ENI
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Mes réservations :</h1>
+<a href="{% url 'booking_form' %}">
+    <button type="button">Nouvelle réservation</button>
+</a>
+{% if bookings %}
+    {% for booking in bookings %}
+    <section class="card">
+        <p>Réservation de {{booking.resource.name}} </p>
+        <p>du {{booking.start_at | date:"d/m/y"}} au {{booking.end_at | date:"d/m/y"}}. </p>
+        <p> par : {{booking.user.username | capfirst }} </p>
+        <div>
+            <p> Status :
+            <span class="booking-status
+                {% if booking.status == '01' %}
+                green
+                {% else %}
+                red
+                {% endif %}">
+            {{ booking.get_status_display }} </span>
+            </p>
+        </div>
+        {% if booking.status == '01' %}
+        <form method="post" action="{% url 'booking_cancel' booking.pk %}">
+            {% csrf_token %}
+            <button type="submit">Annuler</button>
+        </form>
+        {%  endif %}
+        </section>
+{% endfor %}
+{% else %}
+ <p>Vous n'avez aucune réservation pour le moment</p>
+{% endif %}
+{% endblock %}

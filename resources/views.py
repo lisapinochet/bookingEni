@@ -1,14 +1,16 @@
 from re import search
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import generic
-from django.views.generic import DetailView
 
 from resources.forms.resource import ResourcesFilterForm
 from resources.models import Resource, Category
 
 
 # Create your views here.
+@login_required
 def resource_list(request):
     resources = Resource.objects.select_related('category', 'location')
     form = ResourcesFilterForm(request.GET or None)
@@ -31,5 +33,5 @@ def resource_list(request):
     return render(request, 'resources/catalogue.html', {'resources': resources, 'filter_form': form})
 
 
-class ResourceDetailView(generic.DetailView):
+class ResourceDetailView(LoginRequiredMixin,generic.DetailView):
     model = Resource

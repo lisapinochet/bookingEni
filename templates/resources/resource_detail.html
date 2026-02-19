@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Détails de {{ resource.name }}</title>
-</head>
+{% extends "base.html" %}
+{% block content %}
 <body>
-    <h1>{{ resource.name }}</h1>
+    <h1>Détail de la ressource</h1>
+    <h2>{{ resource.name }}</h2>
     <p>Type : {{ resource.get_type_display }}</p>
     <p>Catégorie : {{ resource.category.name }}</p>
     <p>Lieu : {{ resource.location.address }}</p>
     {% if resource.type == "01" %}
         <p>Capacité : {{ resource.capacity }}</p>
     {% endif %}
+    <div>
+            <span class="status-badge {% if resource.is_active %}green{% else %}red{% endif %}"></span>
+            {% if resource.is_active %}Disponible{% else %}Indisponible{% endif %}
+    </div>
     <a href="{% url 'catalogue' %}">Retour au catalogue</a>
-</body>
-</html>
+{% endblock %}
