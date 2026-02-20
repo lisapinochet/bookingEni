@@ -32,7 +32,7 @@ class Booking(models.Model):
             resource=self.resource,
             status__in=['01'],
             start_at__lte=self.end_at,
-            end_at__gte=self.end_at)
+            end_at__gte=self.start_at)
         if self.pk:
             overlapping = overlapping.exclude(pk=self.pk)
 
